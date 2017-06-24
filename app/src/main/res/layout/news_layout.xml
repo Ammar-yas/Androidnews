@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -17,12 +17,12 @@
         android:textSize="16sp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/textView2"
+        app:layout_constraintRight_toLeftOf="@id/date"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="This is a title" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="8dp"
@@ -32,12 +32,12 @@
         tools:text="Mar 6, 2010" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/section"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@id/title"
         tools:text="section" />
 </android.support.constraint.ConstraintLayout>
