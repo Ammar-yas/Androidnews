@@ -21,8 +21,8 @@ import java.util.List;
 
 public class QueryUtils {
 
-    final static int READ_TIME_OUT = 10000;
-    final static int CONNECT_TIME_OUT = 15000;
+    private final static int READ_TIME_OUT = 10000;
+    private final static int CONNECT_TIME_OUT = 15000;
 
     //Private constructor used to prevent creating instances of this class
     // and method should be called directly
@@ -100,7 +100,6 @@ public class QueryUtils {
         }
 
         List<news> newsList = new ArrayList<>();
-
         try {
             JSONObject baseJasonObject = new JSONObject(newsJson).getJSONObject("response");
             JSONArray newsArray = baseJasonObject.getJSONArray("results");
@@ -131,6 +130,5 @@ public class QueryUtils {
         }
         return extractFeaturesFromJson(jsonResponse);
     }
-
 }
 

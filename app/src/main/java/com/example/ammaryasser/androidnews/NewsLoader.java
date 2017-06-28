@@ -8,7 +8,7 @@ import java.util.List;
 
 public class NewsLoader extends AsyncTaskLoader {
 
-    String url;
+    private String url;
 
     @Override
     protected void onStartLoading() {

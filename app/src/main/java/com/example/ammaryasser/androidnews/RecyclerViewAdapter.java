@@ -1,5 +1,7 @@
 package com.example.ammaryasser.androidnews;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +12,8 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    List<news> newsList;
+    private static final String LOCATION_SEPARATOR = "T";
+    static List<news> newsList;
 
     RecyclerViewAdapter(List<news> newsList) {
         this.newsList = newsList;
@@ -27,7 +30,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.title.setText(newsList.get(position).getTitle());
         holder.section.setText(newsList.get(position).getSection());
-        holder.date.setText(newsList.get(position).getDate());
+        String[] webPublicationDate = newsList.get(position).getDate().split(LOCATION_SEPARATOR);
+        holder.date.setText(webPublicationDate[0]);
     }
 
     @Override
@@ -35,7 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return newsList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView title;
         TextView section;
@@ -46,7 +50,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             title = (TextView) itemView.findViewById(R.id.title);
             section = (TextView) itemView.findViewById(R.id.section);
             date = (TextView) itemView.findViewById(R.id.date);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            news story = newsList.get(getAdapterPosition());
+            Uri newsUri = Uri.parse(story.getUrl());
+            Intent webUrlIntent = new Intent(Intent.ACTION_VIEW, newsUri);
+            v.getContext().startActivity(webUrlIntent);
         }
     }
-
 }
