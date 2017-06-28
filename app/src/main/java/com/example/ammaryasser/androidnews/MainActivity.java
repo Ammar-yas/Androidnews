@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements android.app.Loade
     ProgressBar progressBar;
     RecyclerViewAdapter recyclerViewAdapter;
     List<news> news = new ArrayList<>();
+    boolean isConnected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements android.app.Loade
         ConnectivityManager cm =
                 (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         if (isConnected) {
             loaderManager.initLoader(1, null, MainActivity.this);
         } else {
@@ -67,6 +68,12 @@ public class MainActivity extends AppCompatActivity implements android.app.Loade
         if (data != null && !data.isEmpty()) {
             news.addAll(data);
             recyclerViewAdapter.notifyDataSetChanged();
+
+        } else if (!isConnected) {
+            recyclerView.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+            statusText.setText(R.string.no_internet);
+
         } else {
             statusText.setText(R.string.no_news);
             recyclerView.setVisibility(View.GONE);
